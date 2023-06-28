@@ -6,27 +6,28 @@ using System.Windows.Controls;
 namespace Crypto.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для DataInfo.xaml
+    /// Логика взаимодействия для DataInfoMarket.xaml
     /// </summary>
-    public partial class DataInfo : UserControl
+    public partial class DataInfoMarket : UserControl
     {
-        public Coin coin;
-        public DataInfo(Coin coin)
+        public Market market;
+        public DataInfoMarket(Market market)
         {
             InitializeComponent();
-            SymbolCoin.Text = coin.BaseSymbol;   
-            TradeCountCoin.Text = coin.TradesCount24Hr;
-            PriceCoin.Text = coin.PriceUsd;
+            SymbolCoin.Text = market.BaseSymbol;
+            TradeCountCoin.Text = market.TradesCount24Hr;
+            PriceCoin.Text = market.PriceUsd;
             if (PriceCoin.Text.Length > 10)
             {
                 PriceCoin.Text = PriceCoin.Text.Substring(0, 10);
                 PriceCoin.Text += "...";
             }
-            this.coin = coin;
-        } 
+            this.market = market;
+        }
         private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).Container.Navigate(new CoinDetails(coin));
+            ((MainWindow)Application.Current.MainWindow).Container.Navigate(new MarketDetails(market));
         }
+
     }
 }

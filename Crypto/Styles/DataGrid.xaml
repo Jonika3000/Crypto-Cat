@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="DataGrid" x:Name="BaseDataGrid">
-        <Setter Property="Background" Value="#252525" />
+        <Setter Property="Background" Value="{DynamicResource MainBackgroundGray}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
@@ -10,14 +10,15 @@
         <Setter Property="CanUserResizeColumns" Value="False"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/> 
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#303030" />
+                    <Setter Property="Background" Value="{DynamicResource LightGray}"/>
                     <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="Foreground" Value="White" />
-                    <Setter Property="Padding" Value="15" /> 
+                    <Setter Property="Foreground" Value="{DynamicResource Text}" />
+                    <Setter Property="Padding" Value="10" /> 
                 </Style>
             </Setter.Value>
         </Setter> 
@@ -25,11 +26,10 @@
             <Setter.Value>
                 <Style TargetType="DataGridCell"> 
                     <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#303030"/> 
+                    <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+                    <Setter Property="Background" Value="{DynamicResource LightGray}"/> 
                 </Style> 
             </Setter.Value> 
         </Setter>
-    </Style> 
-
+    </Style>  
 </ResourceDictionary>

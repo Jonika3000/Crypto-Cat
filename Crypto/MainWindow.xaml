@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Crypto"
         mc:Ignorable="d"
         WindowStyle="None"
-        Background="#252525"
+        Background="{DynamicResource MainBackgroundGray}"
         WindowStartupLocation="CenterScreen" 
         AllowsTransparency="True"
         Title="MainWindow" 
@@ -25,14 +25,15 @@
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#202020"
+        <Grid Grid.Row="0" Background="{DynamicResource MainBackground}"
               MouseDown="Header_MouseDown" Name="Header">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="129*"/>
                 <ColumnDefinition Width="571*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left" Grid.Column="1" Margin="1082,0,0,0">
+                        HorizontalAlignment="Left" Grid.Column="1"
+                        Margin="1082,0,0,0">
                 <Button Content="–"
                         Name="ButtonMinimize"
                         Style="{DynamicResource WindowButtons}"
@@ -45,14 +46,14 @@
             <Label Content="Cat Crypto" 
                    Width="100"
                    HorizontalAlignment="Left"
-                   Foreground="White"></Label>
+                   Foreground="{DynamicResource Text}"></Label>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/> 
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Background="#202020"
+            <Grid Grid.Column="0" Background="{DynamicResource MainBackground}"
                   x:Name="GridMenu">
                 <StackPanel Orientation="Vertical"> 
                     <ToggleButton x:Name="Tg_Btn" 
@@ -63,7 +64,7 @@
                                   Background="Transparent" Margin="10,15,0,15" 
                                   Height="30"
                                   Cursor="Hand"
-                                  Width="35" Click="Tg_Btn_Click">
+                                  Width="35">
 
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
@@ -95,11 +96,13 @@
                         </ToggleButton.Triggers> 
                     </ToggleButton>
                     <Button
-                        Style="{StaticResource MenuLeftButton}">
+                        Style="{StaticResource MenuLeftButton}"
+                         x:Name="HomeButton"
+                        Click="HomeButton_Click">
                         <StackPanel Background="Transparent"
                                    Orientation="Horizontal"
                                    Margin="15,0,0,0" 
-                                    Width="300"
+                                     Width="300" 
                                     VerticalAlignment="Bottom"
                             HorizontalAlignment="Left">
                             <Image Source="/Images/HomeIcon.png"
@@ -109,44 +112,66 @@
                         </StackPanel>
                     </Button>
                     <Button
-                        Style="{StaticResource MenuLeftButton}">
+                        Style="{StaticResource MenuLeftButton}"
+                        x:Name="ExchangesButton"
+                        Click="ExchangesButton_Click">
                         <StackPanel Background="Transparent"
                                    Orientation="Horizontal"
                                    Margin="15,0,0,0" 
                                     Width="300"
                                     VerticalAlignment="Bottom"
                             HorizontalAlignment="Left">
-                            <Image Source="/Images/HomeIcon.png"
+                            <Image Source="/Images/Exchange.png"
                                      Height="40" Width="30"/>
-                            <TextBlock Text="Recently listened"  
+                            <TextBlock Text="Exchanges"  
                                        Style="{DynamicResource TextBlockMenu}" />
                         </StackPanel>
                     </Button>
                     <Button
-                        Style="{StaticResource MenuLeftButton}">
+                        Style="{StaticResource MenuLeftButton}"
+                        x:Name="CoinsButton"
+                        Click="CoinsButton_Click">
                         <StackPanel Background="Transparent"
                                    Orientation="Horizontal"
                                    Margin="15,0,0,0" 
                                     Width="300"
                                     VerticalAlignment="Bottom"
                             HorizontalAlignment="Left">
-                            <Image Source="/Images/HomeIcon.png"
+                            <Image Source="/Images/Coins.png"
                                      Height="40" Width="30"/>
-                            <TextBlock Text="Recently listened"  
+                            <TextBlock Text="Coins"  
                                        Style="{DynamicResource TextBlockMenu}" />
                         </StackPanel>
                     </Button>
                     <Button
-                        Style="{StaticResource MenuLeftButton}">
+                        Style="{StaticResource MenuLeftButton}"
+                        x:Name="SearchButton"
+                        Click="SearchButton_Click">
                         <StackPanel Background="Transparent"
                                    Orientation="Horizontal"
                                    Margin="15,0,0,0" 
                                     Width="300"
                                     VerticalAlignment="Bottom"
                             HorizontalAlignment="Left">
-                            <Image Source="/Images/HomeIcon.png"
+                            <Image Source="/Images/Search.png"
                                      Height="40" Width="30"/>
-                            <TextBlock Text="Recently listened"  
+                            <TextBlock Text="Search"  
+                                       Style="{DynamicResource TextBlockMenu}" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Style="{StaticResource MenuLeftButton}"
+                        x:Name="SettingsButton"
+                        Click="SettingsButton_Click">
+                        <StackPanel Background="Transparent"
+                                   Orientation="Horizontal"
+                                   Margin="15,0,0,0" 
+                                    Width="300"
+                                    VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left">
+                            <Image Source="/Images/Settings.png"
+                                     Height="40" Width="30"/>
+                            <TextBlock Text="Settings"  
                                        Style="{DynamicResource TextBlockMenu}" />
                         </StackPanel>
                     </Button>

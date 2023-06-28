@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Crypto.Helpers;
+using Crypto.Pages;
+using Newtonsoft.Json;
+using System;
+using System.Globalization;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Crypto.Models;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Crypto.Pages;
 
 namespace Crypto
 {
@@ -18,48 +17,50 @@ namespace Crypto
     public partial class MainWindow : Window
     {
         private bool ServerStatus = true;
-        public List<Coin> Coins = new List<Coin>();
+
         public MainWindow()
         {
             InitializeComponent();
+            SetTheme();
             PingServer();
-            Task.Run(async () => await GetAllCoins()).Wait();
-            Container.Navigate(new HomePage());
-        }
-        private void Tg_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            if (Tg_Btn.IsChecked == true)
-            { 
+            if (ServerStatus)
+            {
+                if (CheckForInternetConnection())
+                    Container.Navigate(new HomePage());
+                else
+                    Container.Navigate(new NoInternetConnectionPage());
             }
             else
             {
-                 
+                MessageBox.Show("Server not responding", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private async Task GetAllCoins()
+        private static bool CheckForInternetConnection(int timeoutMs = 10000, string url = null)
         {
             try
             {
-                using (var client = new HttpClient())
+                url ??= CultureInfo.InstalledUICulture switch
                 {
-                    HttpResponseMessage response = await client.GetAsync(@"https://api.coincap.io/v2/markets");
+                    { Name: var n } when n.StartsWith("fa") =>
+                        "http://www.aparat.com",
+                    { Name: var n } when n.StartsWith("zh") =>
+                        "http://www.baidu.com",
+                    _ =>
+                        "http://www.gstatic.com/generate_204",
+                };
 
-                    response.EnsureSuccessStatusCode();
-
-                    using (HttpContent content = response.Content)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        JObject responseObject = JsonConvert.DeserializeObject<JObject>(responseBody);
-                        JArray dataArray = responseObject["data"] as JArray;
-                        Coins = dataArray.ToObject<List<Coin>>();
-                    }
-                }
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = timeoutMs;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                    return true;
             }
-            catch (Exception ex)
-            { 
+            catch
+            {
+                return false;
             }
-
-        }
+        } 
+       
         private async void PingServer()
         {
             try
@@ -73,12 +74,35 @@ namespace Crypto
             catch (Exception ex)
             {
                 ServerStatus = false;
-            } 
+            }
 
         }
-        private void GetCoinsData()
-        {
-
+        private void SetTheme()
+        { 
+            if (File.Exists("theme.json"))
+            {
+                string json = File.ReadAllText("theme.json");
+                ThemeInfo themeInfo = JsonConvert.DeserializeObject<ThemeInfo>(json);
+                if (themeInfo.Theme == "Dark")
+                {
+                    AppTheme.ChangeTheme(new Uri("/Themes/Dark.xaml", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    AppTheme.ChangeTheme(new Uri("/Themes/Light.xaml", UriKind.RelativeOrAbsolute));
+                }
+            } 
+            else
+            {
+                AppTheme.ChangeTheme(new Uri("/Themes/Dark.xaml", UriKind.RelativeOrAbsolute));
+                ThemeInfo NewthemeInfo = new ThemeInfo
+                {
+                    Theme = "Dark"
+                };
+                string json = JsonConvert.SerializeObject(NewthemeInfo);
+                File.WriteAllText("Theme.json", json);
+            }
+          
         }
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
@@ -94,11 +118,32 @@ namespace Crypto
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
+        }  
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Container.Navigate(new HomePage());
+        }
+
+        private void ExchangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Container.Navigate(new ExchangesPage());
+        }
+
+        private void CoinsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Container.Navigate(new CoinsPage());
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Container.Navigate(new SearchPage());
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Container.Navigate(new SettingsPage());
         }
     }
-    public class RootObject
-    {
-        [JsonProperty("data")]
-        public List<Coin> Data { get; set; }
-    }
+    
 }

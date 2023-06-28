@@ -1,0 +1,64 @@
+﻿<Page x:Class="Crypto.Pages.ExchangeDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Crypto.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExchangeDetailPage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Button.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"> 
+        <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <Image x:Name="ImageExc"
+               Width="80"
+               HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="20"
+               Height="80"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="NameExc"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="24"
+                               Margin="10"/>
+                    <TextBlock x:Name="YearExc"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="24"
+                               Margin="10"/>
+                <TextBlock x:Name="CountryExc"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="24"
+                               Margin="10"/>
+                    <Button
+                        Style="{DynamicResource SimpleButton}"
+                        HorizontalAlignment="Left"
+                        x:Name="WebSiteButton"
+                        Click="WebSiteButton_Click"
+                        Margin="10"
+                        Width="130"
+                        Height="30">   
+                        Visit WebSite
+                    </Button> 
+                    <TextBlock x:Name="DescriptionExc"
+                           FontSize="24"
+                               Margin="10"
+                               Width="300"
+                           Foreground="{DynamicResource Text}"
+                               TextWrapping="Wrap"/>
+                <TextBlock x:Name="TrustExc"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="24"
+                               Margin="10"/>
+            </StackPanel>
+            </StackPanel> 
+        </ScrollViewer>
+    </Grid>
+</Page>

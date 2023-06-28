@@ -5,17 +5,16 @@ using System.Windows.Controls;
 namespace Crypto.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для ListCoins.xaml
+    /// Логика взаимодействия для ListMarkets.xaml
     /// </summary>
-
-    public partial class ListCoins : UserControl
+    public partial class ListMarkets : UserControl
     {
-        public ListCoins(List<Coin> Coins)
+        public ListMarkets(List<Market> marketList)
         {
             InitializeComponent();
-            foreach (var coin in Coins)
+            foreach (var coin in marketList)
             {
-                DataInfo info = new DataInfo(coin);
+                DataInfoMarket info = new DataInfoMarket(coin);
                 MainStackPanel.Children.Add(info);
             }
 

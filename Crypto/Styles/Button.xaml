@@ -1,9 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="SecundaryIconColor" Color="White"/>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"> 
     <Style x:Key="WindowButtons" TargetType="Button">
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Width" Value="30"/>
@@ -22,19 +21,17 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#252525"/>
+                <Setter Property="Background" Value="{DynamicResource MainBackgroundGray}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="MenuLeftButton" TargetType="Button">
-        <Setter Property="Cursor" Value="Hand"/> 
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Width" Value="300"/>
-        <Setter Property="Height" Value="45"/>
-        <Setter Property="Margin" Value="5 20 0 0"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+    <Style x:Key="SimpleButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+        <Setter Property="Background" Value="{DynamicResource LightGray}"/>
+        <Setter Property="BorderThickness" Value="0"/>  
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/> 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -46,8 +43,32 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#202020"/>
+                <Setter Property="Background" Value="{DynamicResource MainBackgroundGray}"/>
             </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="MenuLeftButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/> 
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="45"/> 
+        <Setter Property="Margin" Value="5 20 0 0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"  >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate> 
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MainBackgroundGray}"/>
+            </Trigger> 
         </Style.Triggers>
     </Style>
     <Style x:Key="iToggleButtonStyle" TargetType="{x:Type ToggleButton}">
@@ -74,7 +95,7 @@
                                         Value="Transparent"/>
                             <Setter Property="BorderBrush"
                                         TargetName="border"
-                                        Value="#FFFFFF"/>
+                                        Value="{DynamicResource Text}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Setter Property="Background"
@@ -82,7 +103,7 @@
                                         Value="Transparent"/>
                             <Setter Property="BorderBrush"
                                         TargetName="border"
-                                       Value="#FFFFFF"/>
+                                       Value="{DynamicResource Text}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -1,19 +1,13 @@
 ﻿using Crypto.Controls;
 using Crypto.Models;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Crypto.Pages
 {
@@ -22,11 +16,36 @@ namespace Crypto.Pages
     /// </summary>
     public partial class HomePage : Page
     {
-        List<Coin> coinList = ((MainWindow)Application.Current.MainWindow).Coins.Take(10).ToList();
+        List<Market> marketList;
         public HomePage()
         {
             InitializeComponent();
-            GridLeft.Children.Add(new ListCoins(coinList));
+            Task.Run(async () => await GetAllMarkets()).Wait();
+            GridLeft.Children.Add(new ListMarkets(marketList));
+        }
+        private async Task GetAllMarkets()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(@"https://api.coincap.io/v2/markets");
+
+                    response.EnsureSuccessStatusCode();
+
+                    using (HttpContent content = response.Content)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        JObject responseObject = JsonConvert.DeserializeObject<JObject>(responseBody);
+                        JArray dataArray = responseObject["data"] as JArray;
+                        marketList = dataArray.ToObject<List<Market>>();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
         }
     }
 }

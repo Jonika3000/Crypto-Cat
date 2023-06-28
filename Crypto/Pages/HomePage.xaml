@@ -8,15 +8,13 @@
       xmlns:localControls="clr-namespace:Crypto.Controls"
       d:DesignHeight="750" d:DesignWidth="1300"
       Title="HomePage"
-      Background="#252525">
+      Background="{DynamicResource MainBackgroundGray}">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/DataGrid.xaml"/> 
-            </ResourceDictionary.MergedDictionaries>
-           
-        </ResourceDictionary>
-        
+            </ResourceDictionary.MergedDictionaries> 
+        </ResourceDictionary> 
     </Page.Resources> 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,11 +26,11 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                         x:Name="StackPanelMainPage">
-                <Label Foreground="White"
+                <Label Foreground="{DynamicResource Text}"
                            Padding="25 0"
                        HorizontalAlignment="Center"
                            FontSize="60">Welcome!</Label>
-                <TextBlock Foreground="White"
+                <TextBlock Foreground="{DynamicResource Text}"
                            FontSize="24"
                            TextWrapping="Wrap"
                            Padding="10"> 
@@ -43,14 +41,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
+            </Grid.ColumnDefinitions> 
                 <Grid Grid.Column="0" Margin="20"
               x:Name="GridLeft" VerticalAlignment="Center" >
 
                 </Grid> 
-            <Grid Grid.Column="1">
-               
+            <Grid Grid.Column="1"> 
                     <Image Source="/Images/CatCoin.png"
                        Width="400"
                        Height="400"

@@ -4,7 +4,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Margin" Value="20 0 0 0"/>
@@ -13,7 +13,7 @@
     <Style TargetType="StackPanel" x:Key="Background">
         <Style.Triggers>
             <Trigger Property = "IsMouseOver" Value= "True" >
-                <Setter Property="Background" Value= "#252525"/>
+                <Setter Property="Background" Value= "{DynamicResource MainBackgroundGray}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -1,22 +1,15 @@
-﻿using Crypto.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crypto.Models
+﻿namespace Crypto.Models
 {
     class CoinOnMarkets
     {
-        public string exchangeId { get; set; }
-        public string baseId { get; set; }
-        public string quoteId { get; set; }
-        public string baseSymbol { get; set; }
-        public string quoteSymbol { get; set; }
-        public string volumeUsd24Hr { get; set; }
-        public string priceUsd { get; set; }
-        public string volumePercent { get; set; }
+        public string ExchangeId { get; set; }
+        public string BaseId { get; set; }
+        public string QuoteId { get; set; }
+        public string BaseSymbol { get; set; }
+        public string QuoteSymbol { get; set; }
+        public string VolumeUsd24Hr { get; set; }
+        public string PriceUsd { get; set; }
+        public string VolumePercent { get; set; }
     }
      
 }

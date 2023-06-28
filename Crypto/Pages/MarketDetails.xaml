@@ -1,0 +1,100 @@
+﻿<Page x:Class="Crypto.Pages.MarketDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Crypto.Pages"
+      xmlns:helpers="clr-namespace:Crypto.Helpers" 
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1300"
+      Title="MarketDetails">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:TruncateConverter x:Key="TruncateConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock Foreground="{DynamicResource Text}"
+                       FontSize="24"
+                           FontWeight="SemiBold"
+                           Margin="20">
+                Markets
+                </TextBlock>
+                <DataGrid x:Name="DataGridMarket" ItemsSource="{Binding coinOnMarkets}"
+                      Width="600"
+                      Height="400"
+                      AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Exchange"
+                                            IsReadOnly="True" 
+                                            Width="*"
+                                            Binding="{Binding ExchangeId,Converter={StaticResource TruncateConverter}}"/>
+                        <DataGridTextColumn Header="Quote"
+                                                IsReadOnly="True"
+                                                Width="*"
+                                                Binding="{Binding QuoteId,Converter={StaticResource TruncateConverter}}"/>
+                        <DataGridTextColumn Header="Symbol"
+                                                IsReadOnly="True"
+                                                Width="*"
+                                                Binding="{Binding QuoteSymbol,Converter={StaticResource TruncateConverter}}"/>
+                        <DataGridTextColumn Header="volume USD"
+                                                IsReadOnly="True"
+                                                Width="*"
+                                                Binding="{Binding VolumeUsd24Hr,Converter={StaticResource TruncateConverter}}"/>
+                        <DataGridTextColumn Header="Price"
+                                                IsReadOnly="True"
+                                                Width="*"
+                                                Binding="{Binding PriceUsd ,Converter={StaticResource TruncateConverter}}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+           
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock
+                    x:Name="Symbol"
+                    Foreground="{DynamicResource Text}"
+                    FontWeight="SemiBold"
+                    Margin="20"
+                    FontSize="24"
+                    TextWrapping="Wrap">
+                    Symbol:
+                </TextBlock>
+                <TextBlock
+                    x:Name="Price"
+                    Margin="20"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource Text}"
+                    FontSize="24"
+                    TextWrapping="Wrap">
+                    Price USD:
+                </TextBlock>
+                <TextBlock
+                    x:Name="TradeCount"
+                    Margin="20"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource Text}"
+                    FontSize="24"
+                    TextWrapping="Wrap">
+                    Trade Count:
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
